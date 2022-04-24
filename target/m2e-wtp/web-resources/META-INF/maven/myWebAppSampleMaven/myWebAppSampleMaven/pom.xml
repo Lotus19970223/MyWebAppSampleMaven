@@ -1,0 +1,81 @@
+<!-- https://github.com/Lotus19970223/MyWebAppSampleMaven -->
+<!-- ↑リモートリポジトリのアドレス -->
+<!-- https://techacademy.jp/magazine/6235#sec3_1 -->
+<!-- ↑リモートリポジトリに反映の手順 -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>myWebAppSampleMaven</groupId>
+	<artifactId>myWebAppSampleMaven</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<build>
+		<!-- https://did2memo.net/2013/01/16/how-to-convert-eclipse-project-with-ant-to-maven-project-directory/ -->
+		<!-- ソースが置いてあるディレクトリと、コンパイル結果を出力するディレクトリを設定 -->
+		<sourceDirectory>${basedir}/src</sourceDirectory>
+		<testSourceDirectory>${basedir}/test</testSourceDirectory>
+		<outputDirectory>${basedir}/target/classes</outputDirectory>
+		<testOutputDirectory>${basedir}/target/test-classes</testOutputDirectory>
+		<directory>${basedir}/target</directory>
+		<!-- ここまで -->
+
+		<!-- https://mvnrepository.com/artifact/com.heroku.sdk/heroku-deploy -->
+		<!-- herokuからのデプロイ用 -->
+		<plugins>
+			<!-- https://github.com/heroku/heroku-maven-plugin#readme -->
+			<!-- herokuからのデプロイ用 -->
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>3.0.3</version>
+				<configuration>
+					<appName>my-web-app-sample-maven</appName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<dependencies>
+					<dependency>
+						<groupId>com.heroku.sdk</groupId>
+						<artifactId>heroku-deploy</artifactId>
+						<version>3.0.4</version>
+					</dependency>
+				</dependencies>
+				<!-- herokuからのデプロイ用ここまで -->
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<!-- https://devcenter.heroku.com/ja/articles/deploying-java-applications-with-the-heroku-maven-plugin -->
+			<!-- herokuからのデプロイ用 -->
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>3.0.3</version>
+			</plugin>
+			<!-- herokuからのデプロイ用ここまで -->
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>postgres</groupId>
+			<artifactId>postgres</artifactId>
+			<version>42.3.3</version>
+			<scope>system</scope>
+			<systemPath>C:\pleiades-2020-09-java-win-64bit-jre_20200920\pleiades\eclipse\plugins\postgresql-42.3.3.jar</systemPath>
+		</dependency>
+	</dependencies>
+</project>
